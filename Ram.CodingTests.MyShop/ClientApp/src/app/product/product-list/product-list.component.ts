@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product-service/product.service';
 
@@ -9,15 +10,12 @@ import { ProductService } from '../../services/product-service/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[];
+  products$: Observable<Product[]>;
 
   constructor(public productService: ProductService) {}
 
   ngOnInit() {
-    //todo: handle error and display user friendly message on the screen
-    this.productService.getProducts().subscribe(
-      (response) => { this.products = response; },
-    (error) => { console.log(error);  });
+    this.products$ = this.productService.getProducts();
   }
 
 }

@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockShoppingCartService } from 'src/app/services/shopping-cart-service/mock-shopping-cart.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart-service/shopping-cart.service';
 import { Product } from '../../models/product';
 import { ProductTypeEnum } from '../../models/product-type-enum';
 
@@ -12,7 +14,9 @@ describe('ProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductComponent ]
+      declarations: [ ProductComponent ],
+      providers: [
+        { provide: ShoppingCartService, useClass: MockShoppingCartService }]
     })
     .compileComponents();
   }));
@@ -35,5 +39,18 @@ describe('ProductComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelector('.card-text').textContent).toBe(mockProduct.description);
     expect(fixture.debugElement.nativeElement.querySelector('.price').textContent).toBe('$'+mockProduct.price);
   });
+
+  it('addToCart should call shoppingCartService to add the product to cart', () => {
+    const shoppingCartService: ShoppingCartService = TestBed.get(ShoppingCartService);
+
+    spyOn(shoppingCartService,'addToCart').and.callThrough();
+    spyOn(component, 'addToCart').and.callThrough();
+    
+    fixture.debugElement.nativeElement.querySelector('#btnAddToCart').click();
+    
+    expect(component.addToCart).toHaveBeenCalled();
+    expect(shoppingCartService.addToCart).toHaveBeenCalled();
+  });
+
 });
 

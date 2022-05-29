@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { ProductModule } from './product/product.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { ProductModule } from './product/product.module';
     HttpClientModule,
     FormsModule,
     ProductModule,
+    MatIconModule,
+    MatBadgeModule,
     RouterModule.forRoot([
       { path: '', loadChildren: './product/product.module#ProductModule', pathMatch: 'full' }
     ])

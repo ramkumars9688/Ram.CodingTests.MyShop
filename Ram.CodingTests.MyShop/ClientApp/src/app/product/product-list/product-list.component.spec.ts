@@ -29,12 +29,4 @@ describe('ProductListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnint should load products', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    expect(component.products).toEqual([{ id: 1, name: 'Apple', description: 'test description', price: 6, type: ProductTypeEnum.Fruit },
-    { id: 1, name: 'Carrot', description: 'test description', price: 5, type: ProductTypeEnum.Vegetable }]);
-  });
-
 });
