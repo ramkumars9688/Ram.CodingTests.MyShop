@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Ram.CodingTests.MyShop.Models;
+using Ram.CodingTests.MyShop.DAL;
 using Ram.CodingTests.MyShop.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ram.CodingTests.MyShop.Controllers
 {
@@ -17,7 +18,7 @@ namespace Ram.CodingTests.MyShop.Controllers
         }
 
         [HttpGet]
-        public IReadOnlyList<Product> Get()
+        public Task<IReadOnlyList<Product>> Get()
         {
             return _productService.GetAllProducts();
         }

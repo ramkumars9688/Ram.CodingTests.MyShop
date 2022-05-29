@@ -1,4 +1,4 @@
-﻿namespace Ram.CodingTests.MyShop.Models
+﻿namespace Ram.CodingTests.MyShop.DAL
 {
     public enum ProductTypeEnum
     {
