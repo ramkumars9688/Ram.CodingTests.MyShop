@@ -1,0 +1,13 @@
+<div class="col-lg-3 col-md-4 col-6" *ngIf="product">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{product.name}}</h3>
+            <p class="card-text">{{product.description}}</p>
+            <div class="row text-center">
+                <div class="col-md-8 offset-md-2">
+                    <span class="price">${{product.price}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

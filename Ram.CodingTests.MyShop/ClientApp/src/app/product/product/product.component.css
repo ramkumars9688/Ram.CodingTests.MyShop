@@ -1,0 +1,11 @@
+.card
+{
+    width: 20rem; 
+    height: 250px; 
+    margin: 5px; 
+    background-color: cornsilk;
+}
+.price
+{
+    font-size: 36px;
+}
