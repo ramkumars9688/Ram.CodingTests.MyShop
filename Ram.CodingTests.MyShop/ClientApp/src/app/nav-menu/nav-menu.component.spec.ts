@@ -33,20 +33,19 @@ describe('NavMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit should get shopping cart data and update count', () => {
+  it('should get shopping cart data and update count', () => {
     const shoppingCartService: ShoppingCartService = TestBed.get(ShoppingCartService);
 
-    component.ngOnInit();
-      
-    shoppingCartService.getShoppingCartStatus.subscribe((products) =>
-    {
-      expect(products).toEqual([{id:1, name:'Orange', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit}]);
-      expect(component.shoppingCartProductsCount).toBe(products.length);
+    shoppingCartService.getShoppingCartStatus$.subscribe((products) => {
+      expect(products).toEqual([{ id: 1, name: 'Orange', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit, quantity: 2 },
+      { id: 2, name: 'Apple', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit, quantity: 5 },
+      { id: 2, name: 'Carrot', description: 'Fruit', price: 5, type: ProductTypeEnum.Fruit, quantity: 1 }]);
+      expect(component.shoppingCartProductsCount).toBe(8);
     })
   });
 
   it('ngOnDestroy should unsubscribe subscription', () => {
-    
+
     spyOn(component.subscription, 'unsubscribe');
 
     component.ngOnDestroy();

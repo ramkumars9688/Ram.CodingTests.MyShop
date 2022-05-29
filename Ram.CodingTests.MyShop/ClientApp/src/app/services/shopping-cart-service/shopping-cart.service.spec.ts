@@ -23,12 +23,12 @@ describe('ShoppingCartService', () => {
     spyOn(sessionStorageService, 'getItem').and.callThrough();
     spyOn(sessionStorageService, 'setItem').and.callThrough();
 
-    service.addToCart({id:1, name:'Apple', description: 'Fruit', price: 5,type: ProductTypeEnum.Fruit});
+    service.addToCart({id:2, name:'Apple', description: 'Fruit', price: 5,type: ProductTypeEnum.Fruit});
 
-    service.getShoppingCartStatus.subscribe((products) => {
+    service.getShoppingCartStatus$.subscribe((products) => {
       expect(products).toEqual([
-        {id:1, name:'Orange', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit},
-        {id:1, name:'Apple', description: 'Fruit', price: 5,type: ProductTypeEnum.Fruit}
+        {id:1, name:'Orange', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit, quantity: 1},
+        {id:2, name:'Apple', description: 'Fruit', price: 5,type: ProductTypeEnum.Fruit, quantity: 1}
       ]);
     });
 

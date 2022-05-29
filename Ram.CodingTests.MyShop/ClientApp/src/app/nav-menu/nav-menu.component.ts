@@ -1,4 +1,4 @@
-import { Component, OnInit , OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '../models/product';
 import { ShoppingCartService } from '../services/shopping-cart-service/shopping-cart.service';
 
@@ -7,7 +7,7 @@ import { ShoppingCartService } from '../services/shopping-cart-service/shopping-
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent implements OnInit, OnDestroy  {
+export class NavMenuComponent implements OnInit, OnDestroy {
   isExpanded = false;
   shoppingCartProductsCount = 0;
 
@@ -19,8 +19,11 @@ export class NavMenuComponent implements OnInit, OnDestroy  {
 
   ngOnInit() {
 
-    this.subscription = this._shoppingCartService.getShoppingCartStatus.subscribe((products) => {
-        this.shoppingCartProductsCount = products ? products.length : 0;  
+    this.subscription = this._shoppingCartService.getShoppingCartStatus$.subscribe((products) => {
+
+      this.shoppingCartProductsCount = products ?
+        products.map(x => x.quantity).reduce((total, currentValue) => total + currentValue)
+        : 0;
     });
 
   }
@@ -36,5 +39,5 @@ export class NavMenuComponent implements OnInit, OnDestroy  {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
+
 }
