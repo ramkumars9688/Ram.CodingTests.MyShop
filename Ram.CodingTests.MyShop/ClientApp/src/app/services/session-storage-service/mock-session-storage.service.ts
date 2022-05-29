@@ -12,7 +12,7 @@ export class MockSessionStorageService {
 
   public getItem(key: string): any {
     
-    return [{id:1, name:'Orange', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit}];
+    return [{id:1, name:'Orange', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit, quantity: 1}];
   }
 
   public removeItem(key: string): void {

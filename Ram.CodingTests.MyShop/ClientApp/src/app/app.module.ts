@@ -23,7 +23,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatIconModule,
     MatBadgeModule,
     RouterModule.forRoot([
-      { path: '', loadChildren: './product/product.module#ProductModule', pathMatch: 'full' }
+      { path: '', loadChildren: './product/product.module#ProductModule', pathMatch: 'full' },
+      { path: 'shopping-cart', loadChildren: './shopping-cart/shopping-cart.module#ShoppingCartModule', pathMatch: 'full' }
     ])
   ],
   providers: [],

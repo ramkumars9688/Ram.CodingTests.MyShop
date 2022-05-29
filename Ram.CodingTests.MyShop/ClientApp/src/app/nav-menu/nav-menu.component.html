@@ -12,11 +12,12 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/cart']"> <span>
+            <a class="nav-link text-dark" [routerLink]="['/shopping-cart']"> <span>
                 <mat-icon id="iconCart">shopping_cart</mat-icon>
                 <span [hidden]="shoppingCartProductsCount == 0">{{shoppingCartProductsCount}}</span>
               </span>
             </a>
+
           </li>
         </ul>
       </div>

@@ -1,0 +1,16 @@
+<div class="col-md-8 mx-auto">
+    <div *ngFor="let product of cartProducts;">
+        <div class="row" *ngIf="product">
+            <div class="card" style="width: 500px; margin: 5px;">
+                <div class="card-body" >
+                    <h3 class="card-title">{{product.name}}</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <p class="card-text"> {{product.quantity}}</p>
+                        <h4 class="card-text"> ${{product.price * product.quantity}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
