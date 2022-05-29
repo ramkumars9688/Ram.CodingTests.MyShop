@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ram.CodingTests.MyShop.Repository;
+using Ram.CodingTests.MyShop.Services;
 
 namespace Ram.CodingTests.MyShop
 {
@@ -26,6 +28,9 @@ namespace Ram.CodingTests.MyShop
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
