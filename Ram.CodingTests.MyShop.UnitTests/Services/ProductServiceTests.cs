@@ -1,10 +1,11 @@
 ﻿using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using Ram.CodingTests.MyShop.Models;
+using Ram.CodingTests.MyShop.DAL;
 using Ram.CodingTests.MyShop.Repository;
 using Ram.CodingTests.MyShop.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ram.CodingTests.MyShop.UnitTests.Services
 {
@@ -14,14 +15,15 @@ namespace Ram.CodingTests.MyShop.UnitTests.Services
 
         ProductService _productService;
 
-        public ProductServiceTests()
+        [SetUp]
+        public void SetUp()
         {
             _subProductRepository = Substitute.For<IProductRepository>();
             _productService = new ProductService(_subProductRepository);
         }
 
         [Test]
-        public void GetAllProducts_Positive()
+        public async Task GetAllProducts_PositiveAsync()
         {
             var mockProducts = new List<Product>
             {
@@ -42,7 +44,7 @@ namespace Ram.CodingTests.MyShop.UnitTests.Services
             };
 
             _subProductRepository.GetAllProducts().Returns(mockProducts);
-            var result = _productService.GetAllProducts();
+            var result = await _productService.GetAllProducts();
 
             result.Should().BeEquivalentTo(mockProducts);
         }

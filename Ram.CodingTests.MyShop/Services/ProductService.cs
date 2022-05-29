@@ -1,12 +1,13 @@
-﻿using Ram.CodingTests.MyShop.Models;
+﻿using Ram.CodingTests.MyShop.DAL;
 using Ram.CodingTests.MyShop.Repository;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ram.CodingTests.MyShop.Services
 {
     public interface IProductService
     {
-        IReadOnlyList<Product> GetAllProducts();
+        Task<IReadOnlyList<Product>> GetAllProducts();
     }
 
     public class ProductService : IProductService
@@ -18,7 +19,7 @@ namespace Ram.CodingTests.MyShop.Services
             _productRepository = productRepository;
         }
 
-        public IReadOnlyList<Product> GetAllProducts()
+        public Task<IReadOnlyList<Product>> GetAllProducts()
         {
             return _productRepository.GetAllProducts();
         }

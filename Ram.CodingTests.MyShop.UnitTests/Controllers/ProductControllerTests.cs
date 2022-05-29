@@ -2,9 +2,10 @@
 using NSubstitute;
 using NUnit.Framework;
 using Ram.CodingTests.MyShop.Controllers;
-using Ram.CodingTests.MyShop.Models;
+using Ram.CodingTests.MyShop.DAL;
 using Ram.CodingTests.MyShop.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ram.CodingTests.MyShop.UnitTests.Controllers
 {
@@ -13,15 +14,15 @@ namespace Ram.CodingTests.MyShop.UnitTests.Controllers
         private IProductService _subProductService;
 
         ProductController _productController;
-
-        public ProductControllerTests()
+        [SetUp]
+        public void SetUp()
         {
             _subProductService = Substitute.For<IProductService>();
             _productController = new ProductController(_subProductService);
         }
 
         [Test]
-        public void GetAllProducts_Positive()
+        public async Task GetAllProducts_PositiveAsync()
         {
             var mockProducts = new List<Product>
             {
@@ -42,7 +43,7 @@ namespace Ram.CodingTests.MyShop.UnitTests.Controllers
             };
 
             _subProductService.GetAllProducts().Returns(mockProducts);
-            var result = _productController.Get();
+            var result = await _productController.Get();
 
             result.Should().BeEquivalentTo(mockProducts);
         }
