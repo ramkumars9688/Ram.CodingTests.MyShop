@@ -55,4 +55,10 @@ export class ShoppingCartService {
     return this.shoppingCartStatus.getValue();
   }
 
+  clear()
+  {
+    this._sessionStorageService.removeItem(environment.cartStorageKey);
+    this.shoppingCartStatus.next(null);
+  }
+
 }

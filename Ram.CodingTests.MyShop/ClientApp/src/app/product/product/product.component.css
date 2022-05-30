@@ -1,11 +1,17 @@
-.card
-{
-    width: 20rem; 
-    height: 250px; 
-    margin: 5px; 
+.card {
+    width: 20rem;
+    height: 250px;
+    margin: 5px;
     background-color: cornsilk;
 }
-.price
-{
+
+.price {
     font-size: 36px;
+}
+
+.product-bottom-panel {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
 }

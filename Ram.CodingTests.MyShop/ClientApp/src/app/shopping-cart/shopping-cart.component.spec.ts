@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponent } from 'ng-mocks';
 import { CheckoutService } from '../services/checkout-service/checkout.service';
 import { MockCheckoutService } from '../services/checkout-service/mock-checkout.service';
@@ -18,7 +19,8 @@ describe('ShoppingCartComponent', () => {
       providers: [
         { provide:ShoppingCartService, useClass: MockShoppingCartService },
         { provide:CheckoutService, useClass: MockCheckoutService }
-      ]
+      ],
+      imports:[RouterTestingModule]
     })
     .compileComponents();
   }));

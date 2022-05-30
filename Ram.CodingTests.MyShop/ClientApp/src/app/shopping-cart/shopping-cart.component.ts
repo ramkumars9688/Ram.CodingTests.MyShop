@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShoppingCartProduct } from '../models/shopping-cart-product';
 import { User } from '../models/user';
 import { CheckoutService } from '../services/checkout-service/checkout.service';
@@ -15,7 +16,8 @@ export class ShoppingCartComponent implements OnInit {
   user: User;
 
   constructor(private _shoppingCartService: ShoppingCartService,
-    private _checkoutService: CheckoutService) {
+    private _checkoutService: CheckoutService,
+    private _router: Router) {
 
   }
 
@@ -28,7 +30,8 @@ export class ShoppingCartComponent implements OnInit {
       this._checkoutService.
       placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal, currency: 'AUD', user: { email: this.user.email } })
       .subscribe(order => {
-        console.log(order);
+        this._shoppingCartService.clear();
+        this._router.navigateByUrl('order-confirmation/'+order.orderId);
       });
     }
   }
