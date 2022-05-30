@@ -19,6 +19,7 @@ namespace Ram.CodingTests.MyShop.Controllers
         }
 
         [HttpPost]
+
         public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] OrderRequest order)
         {
             try
@@ -34,9 +35,23 @@ namespace Ram.CodingTests.MyShop.Controllers
         }
 
         [HttpGet]
-        public Task<OrderResponse> GetOrder(long id)
+        public async Task<ActionResult<OrderResponse>> GetOrder(long id)
         {
-            return _orderService.GetOrder(id);
+            try
+            {
+                var order = await _orderService.GetOrder(id);
+
+                if(order == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, "Order id not found");
+                }
+
+                return order;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retreiving order.");
+            }
         }
     }
 }

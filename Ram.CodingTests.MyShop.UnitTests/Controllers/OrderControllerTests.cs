@@ -71,7 +71,7 @@ namespace Ram.CodingTests.MyShop.UnitTests.Controllers
 
             var result = await _orderController.GetOrder(123);
 
-            result.Should().BeEquivalentTo(new OrderResponse
+            result.Value.Should().BeEquivalentTo(new OrderResponse
             {
                 OrderId = 123456
             });
