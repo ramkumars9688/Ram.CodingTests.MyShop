@@ -21,7 +21,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
     this.subscription = this._shoppingCartService.getShoppingCartStatus$.subscribe((products) => {
 
-      this.shoppingCartProductsCount = products ?
+      this.shoppingCartProductsCount = products && products.length > 0 ?
         products.map(x => x.quantity).reduce((total, currentValue) => total + currentValue)
         : 0;
     });

@@ -19,6 +19,11 @@ export class MockShoppingCartService {
 
   refreshCart()
   {
+
+  }
+
+  getCartData()
+  {
     
   }
 

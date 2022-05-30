@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../models/product';
+import { ShoppingCartProduct } from '../models/shopping-cart-product';
+import { User } from '../models/user';
+import { CheckoutService } from '../services/checkout-service/checkout.service';
 import { ShoppingCartService } from '../services/shopping-cart-service/shopping-cart.service';
 
 @Component({
@@ -9,14 +11,36 @@ import { ShoppingCartService } from '../services/shopping-cart-service/shopping-
 })
 export class ShoppingCartComponent implements OnInit {
 
-  cartProducts: Product[];
-  
-  constructor(private _shoppingCartService: ShoppingCartService) {
+  cartProducts: ShoppingCartProduct[];
+  user: User;
+
+  constructor(private _shoppingCartService: ShoppingCartService,
+    private _checkoutService: CheckoutService) {
 
   }
 
   ngOnInit() {
     this.cartProducts = this._shoppingCartService.getCartData()
+  }
+
+  placeOrder() {
+    if (this.cartProducts) {
+      this._checkoutService.
+      placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal, currency: 'AUD', user: { email: this.user.email } })
+      .subscribe(order => {
+        console.log(order);
+      });
+    }
+  }
+
+  get orderTotal(): number {
+    return this.cartProducts ? this.cartProducts.reduce((acc, val) => acc += val.quantity * val.price, 0) : 0;
+  }
+
+  get isCartReadyForSubmit()
+  {
+    return this.user && this.user.email && this.cartProducts && this.cartProducts.length > 0 && 
+    this.cartProducts.every(product => product.id > 0 && product.quantity > 0 && this.orderTotal > 0);
   }
 
 }

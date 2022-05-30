@@ -44,4 +44,16 @@ describe('HttpClientService', () => {
 
   });
 
+  it('should post data to http endpoint', () => {
+    const mockData = [{ Name: "Test1" }, { Name: "Test2" }];
+    const mockResponse = { Name: "Test1" };
+
+    service.post('api/testaction', mockData).subscribe(data => {
+      expect(data).toEqual(mockResponse)
+    });
+
+    mockHttpCall('api/testaction', 'POST', mockResponse);
+
+  });
+
 });
