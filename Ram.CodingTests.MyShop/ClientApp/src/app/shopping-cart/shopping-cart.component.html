@@ -6,17 +6,22 @@
         <div class="row" *ngIf="selectedCountry">
             <div class="card">
                 <div class="card-body">
+                    <button class="close-button" mat-icon-button (click)="removeProduct(cartProduct)">
+                        <mat-icon>clear</mat-icon>
+                    </button>
                     <h3 class="card-title">{{cartProduct.name}}</h3>
                     <div class="container-center">
                         <h4 class="card-text"> {{cartProduct.quantity}}</h4>
-                        <h4 class="card-text"> {{selectedCountry.currency.symbol}}{{ currencyFactor * cartProduct.price * cartProduct.quantity | number : '1.2-2'}}</h4>
+                        <h4 class="card-text"> {{selectedCountry.currency.symbol}}{{ currencyFactor * cartProduct.price
+                            * cartProduct.quantity | number : '1.2-2'}}</h4>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="selectedCountry">
         <div class="card">
             <div class="card-body">
                 <div class="container-center">
@@ -29,8 +34,10 @@
 
     <div class="row margin-5">
         <div class="col-md-8 mx-auto">
-            <button id="btnAddToCart" type="button" class="btn btn-primary" (click)="placeOrder()"
+            <button id="btnPlaceOrder" type="button" class="btn btn-primary" (click)="placeOrder()"
                 [disabled]="!isCartReadyForSubmit">Place order</button>
+            <button id="btnRemoveAll" type="button" class="btn btn-secondary" (click)="removeAll()"
+                [disabled]="!cartProducts || cartProducts.length == 0">Remove all</button>
         </div>
     </div>
 

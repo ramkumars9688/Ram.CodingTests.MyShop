@@ -17,20 +17,18 @@ export class ShoppingCartService {
 
   addToCart(product: Product) {
 
-    let cartProducts:ShoppingCartProduct[] = this._sessionStorageService.getItem(environment.cartStorageKey);
-    
+    let cartProducts: ShoppingCartProduct[] = this._sessionStorageService.getItem(environment.cartStorageKey);
+
     if (!cartProducts) {
       cartProducts = [];
     }
 
     let matchedProduct = cartProducts.find(cartProduct => cartProduct.id == product.id);
 
-    if(matchedProduct)
-    {
+    if (matchedProduct) {
       matchedProduct.quantity += 1;
     }
-    else
-    {
+    else {
       let cartProduct: ShoppingCartProduct = <ShoppingCartProduct>product;
       cartProduct.quantity = 1;
       cartProducts.push(cartProduct)
@@ -50,13 +48,33 @@ export class ShoppingCartService {
     this.shoppingCartStatus.next(products);
   }
 
-  getCartData(): ShoppingCartProduct[]
-  {
+  removeCartItem(cartProductId: number): boolean {
+    let cartProducts: ShoppingCartProduct[] = this._sessionStorageService.getItem(environment.cartStorageKey);
+
+    if (!cartProducts) {
+      return false;
+    }
+
+    let matchedIndex = cartProducts.findIndex(x => x.id == cartProductId);
+    console.log(cartProducts);
+    console.log(matchedIndex);
+
+    if (matchedIndex >= 0) {
+      cartProducts.splice(matchedIndex, 1);
+
+      this._sessionStorageService.setItem(environment.cartStorageKey, cartProducts);
+      this.shoppingCartStatus.next(cartProducts);
+
+      return true;
+    }
+    return false;
+  }
+
+  getCartData(): ShoppingCartProduct[] {
     return this.shoppingCartStatus.getValue();
   }
 
-  clear()
-  {
+  clear() {
     this._sessionStorageService.removeItem(environment.cartStorageKey);
     this.shoppingCartStatus.next(null);
   }

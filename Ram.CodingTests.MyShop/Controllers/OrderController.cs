@@ -24,8 +24,7 @@ namespace Ram.CodingTests.MyShop.Controllers
             try
             {
                 var createdOrder = await _orderService.CreateOrder(order);
-                return CreatedAtAction(nameof(GetOrder), new { id = createdOrder.OrderId }, createdOrder);
-                
+                return CreatedAtAction(nameof(GetOrder), new { id = createdOrder.OrderId }, createdOrder);   
             }
             catch (Exception)
             {
