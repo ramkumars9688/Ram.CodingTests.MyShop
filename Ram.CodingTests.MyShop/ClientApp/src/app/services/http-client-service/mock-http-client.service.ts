@@ -15,4 +15,9 @@ export class MockHttpClientService {
     return of(this.products);
   }
 
+  post<T>(path: string, data: any)
+  {
+    return of({id: 123456});
+  }
+
 }

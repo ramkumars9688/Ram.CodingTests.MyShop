@@ -19,3 +19,8 @@ code {
 {
     text-align: center;
 }
+
+.container-center
+{
+  display: flex; justify-content: space-between; align-items: center;
+}

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs/internal/observable/of';
 import { ProductTypeEnum } from 'src/app/models/product-type-enum';
 import { MockSessionStorageService } from '../session-storage-service/mock-session-storage.service';
 import { SessionStorageService } from '../session-storage-service/session-storage.service';
@@ -35,6 +36,28 @@ describe('ShoppingCartService', () => {
     expect(sessionStorageService.getItem).toHaveBeenCalled();
     expect(sessionStorageService.setItem).toHaveBeenCalled();
 
+  });
+
+  it('should refresh cart and publish cart data', () => {
+    const service: ShoppingCartService = TestBed.get(ShoppingCartService);
+    const sessionStorageService: SessionStorageService = TestBed.get(SessionStorageService);
+  
+    spyOn(sessionStorageService, 'getItem').and.callThrough();
+
+    service.refreshCart();
+
+    service.getShoppingCartStatus$.subscribe((products) => {
+      expect(products).toEqual([
+        {id:1, name:'Orange', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit, quantity: 1}
+      ]);
+    });
+
+    expect(sessionStorageService.getItem).toHaveBeenCalled();
+
+  });
+
+  it('should retrieve cart data', () => {
+    // Todo: when I have time
   });
 
 

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Product } from 'src/app/models/product';
 import { ShoppingCartProduct } from 'src/app/models/shopping-cart-product';

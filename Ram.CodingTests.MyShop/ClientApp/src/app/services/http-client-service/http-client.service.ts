@@ -14,4 +14,8 @@ export class HttpClientService {
     return this.http.get<T>(`${this.baseUrl}${path}`);
   }
 
+  post<T>(path: string, body: any) {
+    return this.http.post<T>(`${this.baseUrl}${path}`, body);
+  }
+
 }

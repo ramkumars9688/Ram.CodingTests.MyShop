@@ -1,0 +1,10 @@
+<div class="col-8">
+    <h3> Checkout as Guest</h3>
+    <form [formGroup]="userForm">
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" class="form-control" formControlName="email" (change)="onEmailChange($event)"
+                [class.is-invalid]="userForm.get('email').invalid && userForm.get('email').touched" />
+        </div>
+    </form>
+</div>
