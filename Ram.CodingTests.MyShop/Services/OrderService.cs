@@ -32,7 +32,7 @@ namespace Ram.CodingTests.MyShop.Services
 
             var orderResult = await _orderRepository.CreateOrder(order);
 
-            if (orderResult?.Id >= 0)
+            if (orderResult?.Id > 0)
             {
                 return new OrderResponse
                 {
@@ -48,7 +48,7 @@ namespace Ram.CodingTests.MyShop.Services
         {
             var orderResult = await _orderRepository.GetOrder(id);
 
-            if (orderResult?.Id >= 0)
+            if (orderResult?.Id > 0)
             {
                 return new OrderResponse
                 {
@@ -56,8 +56,7 @@ namespace Ram.CodingTests.MyShop.Services
                 };
             }
 
-            throw new Exception("Unable to retrieve order");
-
+            return null;
         }
 
         private async Task<Order> ConstructDalOrder(OrderRequest orderRequest)
@@ -73,10 +72,16 @@ namespace Ram.CodingTests.MyShop.Services
 
             foreach (var shoppingCartItem in orderRequest.ShoppingCartItems)
             {
+                var product = await _productRepository.GetProduct(shoppingCartItem.ProductId);
+                if (product == null)
+                {
+                    // invalid productId sent
+                    throw new InvalidOperationException();
+                }
                 order.Products.Add(
                     new ShoppingCartProduct
                     {
-                        Product = await _productRepository.GetProduct(shoppingCartItem.ProductId),
+                        Product = product,
                         Quantity = shoppingCartItem.Quantity
                     });
             }

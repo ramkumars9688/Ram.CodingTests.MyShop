@@ -43,7 +43,7 @@ export class ShoppingCartComponent implements OnInit {
   placeOrder() {
     if (this.cartProducts) {
       this._checkoutService.
-        placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal, currency: this.selectedCountry.code, user: { email: this.user.email } })
+        placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal, currency: this.selectedCountry.currency.code, user: { email: this.user.email } })
         .subscribe(order => {
           this._shoppingCartService.clear();
           this._router.navigateByUrl('order-confirmation/' + order.orderId);
