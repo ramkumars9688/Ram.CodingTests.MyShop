@@ -10,7 +10,7 @@
         <div class="form-group">
             <label for="Country">Country:</label>
             <select formControlName="country" class="form-control" (change)="userFormChange()">
-                <option *ngFor="let country of countries$ | async" [ngValue]="country">{{country.name}}</option>
+                <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
             </select>
         </div>
     </form>

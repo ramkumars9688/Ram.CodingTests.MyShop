@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Country } from '../models/country';
 import { User } from '../models/user';
-import { CountryService } from '../services/country-service/country.service';
 
 @Component({
   selector: 'app-user',
@@ -12,10 +11,9 @@ import { CountryService } from '../services/country-service/country.service';
 })
 export class UserComponent implements OnInit {
 
+  @Input() countries: Country[];
   @Input() user: User;
   @Output() userChange = new EventEmitter<User>();
-
-  countries$: Observable<Country[]>;
 
   userForm = new FormGroup({
     email: new FormControl('', [
@@ -25,10 +23,9 @@ export class UserComponent implements OnInit {
       Validators.required])
   });
 
-  constructor(private _countryService: CountryService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.countries$ = this._countryService.getCountries()
   }
 
   userFormChange()
@@ -38,8 +35,6 @@ export class UserComponent implements OnInit {
 
     let email = (this.userForm.get('email').valid && this.userForm.get('email').value) ? 
     this.userForm.get('email').value : undefined;
-
-    console.log(country);
 
     this.userChange.emit({ email: email, country: country });
   }
