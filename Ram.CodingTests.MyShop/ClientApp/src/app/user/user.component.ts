@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { Country } from '../models/country';
 import { User } from '../models/user';
+import { CountryService } from '../services/country-service/country.service';
 
 @Component({
   selector: 'app-user',
@@ -12,27 +15,33 @@ export class UserComponent implements OnInit {
   @Input() user: User;
   @Output() userChange = new EventEmitter<User>();
 
+  countries$: Observable<Country[]>;
+
   userForm = new FormGroup({
-    email: new FormControl('',[
+    email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])
-    });
-    
-  constructor() { }
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    country: new FormControl('', [
+      Validators.required])
+  });
+
+  constructor(private _countryService: CountryService) { }
 
   ngOnInit() {
+    this.countries$ = this._countryService.getCountries()
   }
 
-  onEmailChange()
+  userFormChange()
   {
-    if(this.userForm.get('email').valid && this.userForm.get('email').value)
-    {
-      this.userChange.emit({email: this.userForm.get('email').value});
-    }
-    else
-    {
-      this.userChange.emit({email: undefined});
-    }
+    let country = (this.userForm.get('country').valid && this.userForm.get('country').value) ? 
+    this.userForm.get('country').value : undefined;
+
+    let email = (this.userForm.get('email').valid && this.userForm.get('email').value) ? 
+    this.userForm.get('email').value : undefined;
+
+    console.log(country);
+
+    this.userChange.emit({ email: email, country: country });
   }
 
 }
