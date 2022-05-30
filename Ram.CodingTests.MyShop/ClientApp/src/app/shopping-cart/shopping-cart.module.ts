@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShoppingCartComponent } from './shopping-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from '../user/user.component';
-import { MatIconModule } from '@angular/material';
+import { MatButtonModule, MatIconModule } from '@angular/material';
 
 const routes: Routes = [
   { path: '', component: ShoppingCartComponent }
@@ -17,6 +17,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatButtonModule,
     [RouterModule.forChild(routes)]
   ]
 })

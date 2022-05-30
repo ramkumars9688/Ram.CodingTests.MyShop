@@ -8,6 +8,8 @@ import { CountryService } from '../services/country-service/country.service';
 import { MockCountryService } from '../services/country-service/mock-country.service';
 import { CurrencyService } from '../services/currency-service/currency.service';
 import { MockCurrencyService } from '../services/currency-service/mock-currency.service';
+import { MockShippingService } from '../services/shipping-service/mock-shipping.service';
+import { ShippingService } from '../services/shipping-service/shipping.service';
 import { MockShoppingCartService } from '../services/shopping-cart-service/mock-shopping-cart.service';
 import { ShoppingCartService } from '../services/shopping-cart-service/shopping-cart.service';
 import { UserComponent } from '../user/user.component';
@@ -24,7 +26,8 @@ describe('ShoppingCartComponent', () => {
         { provide:ShoppingCartService, useClass: MockShoppingCartService },
         { provide:CheckoutService, useClass: MockCheckoutService },
         { provide:CountryService, useClass: MockCountryService },
-        { provide:CurrencyService, useClass: MockCurrencyService }
+        { provide:CurrencyService, useClass: MockCurrencyService },
+        { provide:ShippingService, useClass: MockShippingService }
       ],
       imports:[RouterTestingModule, MatIconModule]
     })

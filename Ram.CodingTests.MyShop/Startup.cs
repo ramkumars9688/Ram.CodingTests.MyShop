@@ -40,6 +40,8 @@ namespace Ram.CodingTests.MyShop
 
             services.AddScoped<ICurrencyRepository, CurrencyRepository>();
             services.AddScoped<ICurrencyService, CurrencyService>();
+
+            services.AddSingleton<IShippingService, ShippingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
