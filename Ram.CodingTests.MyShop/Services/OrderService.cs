@@ -28,28 +28,11 @@ namespace Ram.CodingTests.MyShop.Services
 
         public async Task<OrderResponse> CreateOrder(OrderRequest orderRequest)
         {
-            var order = new Order
-            {
-                CreationDate = DateTime.UtcNow,
-                User = await _userRepository.GetUser(orderRequest.User.Email),
-                TotalAmount = orderRequest.TotalAmount,
-                Currency = orderRequest.Currency,
-                Products = new List<ShoppingCartProduct>()
-            };
-
-            foreach (var shoppingCartItem in orderRequest.ShoppingCartItems)
-            {
-                order.Products.Add(
-                    new ShoppingCartProduct
-                    {
-                        Product = await _productRepository.GetProduct(shoppingCartItem.ProductId),
-                        Quantity = shoppingCartItem.Quantity
-                    });
-            }
+            Order order = await ConstructDalOrder(orderRequest);
 
             var orderResult = await _orderRepository.CreateOrder(order);
 
-            if(orderResult?.Id >= 0)
+            if (orderResult?.Id >= 0)
             {
                 return new OrderResponse
                 {
@@ -75,6 +58,30 @@ namespace Ram.CodingTests.MyShop.Services
 
             throw new Exception("Unable to retrieve order");
 
+        }
+
+        private async Task<Order> ConstructDalOrder(OrderRequest orderRequest)
+        {
+            var order = new Order
+            {
+                CreationDate = DateTime.UtcNow,
+                User = await _userRepository.GetUser(orderRequest.User.Email),
+                TotalAmount = orderRequest.TotalAmount,
+                Currency = orderRequest.Currency,
+                Products = new List<ShoppingCartProduct>()
+            };
+
+            foreach (var shoppingCartItem in orderRequest.ShoppingCartItems)
+            {
+                order.Products.Add(
+                    new ShoppingCartProduct
+                    {
+                        Product = await _productRepository.GetProduct(shoppingCartItem.ProductId),
+                        Quantity = shoppingCartItem.Quantity
+                    });
+            }
+
+            return order;
         }
     }
 }

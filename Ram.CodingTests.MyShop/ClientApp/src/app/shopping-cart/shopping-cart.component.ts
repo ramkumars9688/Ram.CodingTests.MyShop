@@ -37,7 +37,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cartProducts = this._shoppingCartService.getCartData()
+    this.cartProducts = this._shoppingCartService.getCartData();
   }
 
   placeOrder() {
@@ -68,6 +68,18 @@ export class ShoppingCartComponent implements OnInit {
       this.currencyFactor = factor;
     });
 
+  }
+
+  removeProduct(cartProduct: ShoppingCartProduct) {
+    console.log(cartProduct);
+    if (this._shoppingCartService.removeCartItem(cartProduct.id)) {
+      this.cartProducts = this._shoppingCartService.getCartData();
+    }
+  }
+
+  removeAll() {
+    this._shoppingCartService.clear();
+    this.cartProducts = this._shoppingCartService.getCartData();
   }
 
   get orderTotal(): number {
