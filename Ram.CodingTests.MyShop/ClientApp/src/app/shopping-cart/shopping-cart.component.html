@@ -32,6 +32,17 @@
         </div>
     </div>
 
+    <div class="row" *ngIf="selectedCountry">
+        <div class="card">
+            <div class="card-body">
+                <div class="container-center">
+                    <h4 class="card-text"> Shipping Cost</h4>
+                    <h4 class="card-text"> {{selectedCountry.currency.symbol}}{{ shippingCost | number : '1.2-2'}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row margin-5">
         <div class="col-md-8 mx-auto">
             <button id="btnPlaceOrder" type="button" class="btn btn-primary" (click)="placeOrder()"

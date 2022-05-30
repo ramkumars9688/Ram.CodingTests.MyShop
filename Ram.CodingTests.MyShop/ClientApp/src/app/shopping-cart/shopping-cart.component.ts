@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { CheckoutService } from '../services/checkout-service/checkout.service';
 import { CountryService } from '../services/country-service/country.service';
 import { CurrencyService } from '../services/currency-service/currency.service';
+import { ShippingService } from '../services/shipping-service/shipping.service';
 import { ShoppingCartService } from '../services/shopping-cart-service/shopping-cart.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class ShoppingCartComponent implements OnInit {
   countries: Country[];
   selectedCountry: Country;
   currencyFactor = 1;
+  shippingCost: number = 0;
 
   defaultCountryCode: string = 'AU'; //Todo: hardcoded for now, Has to configured in backend(DB or config settings)
 
@@ -28,7 +30,8 @@ export class ShoppingCartComponent implements OnInit {
     private _checkoutService: CheckoutService,
     private _router: Router,
     private _countryService: CountryService,
-    private _currencyService: CurrencyService) {
+    private _currencyService: CurrencyService,
+    private _shippingService: ShippingService) {
 
     this._countryService.getCountries().subscribe((countries) => {
       this.countries = countries;
@@ -38,12 +41,13 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     this.cartProducts = this._shoppingCartService.getCartData();
+    this.calculateShippingCost();
   }
 
   placeOrder() {
     if (this.cartProducts) {
       this._checkoutService.
-        placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal, currency: this.selectedCountry.currency.code, user: { email: this.user.email } })
+        placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal + this.shippingCost, currency: this.selectedCountry.currency.code, user: { email: this.user.email } })
         .subscribe(order => {
           this._shoppingCartService.clear();
           this._router.navigateByUrl('order-confirmation/' + order.orderId);
@@ -68,18 +72,33 @@ export class ShoppingCartComponent implements OnInit {
       this.currencyFactor = factor;
     });
 
+    this.calculateShippingCost();
+
   }
 
   removeProduct(cartProduct: ShoppingCartProduct) {
     console.log(cartProduct);
     if (this._shoppingCartService.removeCartItem(cartProduct.id)) {
       this.cartProducts = this._shoppingCartService.getCartData();
+      this.calculateShippingCost();
     }
   }
 
   removeAll() {
     this._shoppingCartService.clear();
     this.cartProducts = this._shoppingCartService.getCartData();
+    this.calculateShippingCost();
+  }
+
+  calculateShippingCost() {
+    if (this.orderTotal == 0) {
+      this.shippingCost = 0;
+      return;
+    }
+
+    this._shippingService.getShippingCost(this.orderTotal).subscribe((cost) => {
+      this.shippingCost = cost;
+    });
   }
 
   get orderTotal(): number {
