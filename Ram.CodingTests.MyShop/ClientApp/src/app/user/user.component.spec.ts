@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CountryService } from '../services/country-service/country.service';
+import { MockCountryService } from '../services/country-service/mock-country.service';
 
 import { UserComponent } from './user.component';
 
@@ -10,7 +12,10 @@ describe('UserComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ UserComponent ],
-      imports: [ReactiveFormsModule]
+      imports: [ReactiveFormsModule],
+      providers: [
+        { provide:CountryService, useClass: MockCountryService }
+      ],
     })
     .compileComponents();
   }));
@@ -24,5 +29,5 @@ describe('UserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  // Todo: Add additional tests when I have time
+  // Todo: To add tests if I have time at the end
 });

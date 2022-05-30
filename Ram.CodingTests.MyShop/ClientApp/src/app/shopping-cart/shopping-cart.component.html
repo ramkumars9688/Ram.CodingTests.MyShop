@@ -1,7 +1,11 @@
 <div class="col-md-8 mx-auto">
+
+    <app-user [(user)]="user" (userChange)="onUserDataChange()"></app-user>
+
     <div *ngFor="let cartProduct of cartProducts;">
         <app-shopping-cart-item [cartProduct]="cartProduct"></app-shopping-cart-item>
     </div>
+
     <div class="row">
         <div class="card">
             <div class="card-body">
@@ -12,8 +16,6 @@
             </div>
         </div>
     </div>
-
-    <app-user [(user)] = "user"></app-user>
 
     <div class="row margin-5">
         <div class="col-md-8 mx-auto">

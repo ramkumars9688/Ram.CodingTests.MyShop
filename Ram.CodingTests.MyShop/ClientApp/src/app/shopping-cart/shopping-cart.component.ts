@@ -36,13 +36,18 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  onUserDataChange()
+  {
+    console.log(this.user);
+  }
+
   get orderTotal(): number {
     return this.cartProducts ? this.cartProducts.reduce((acc, val) => acc += val.quantity * val.price, 0) : 0;
   }
 
   get isCartReadyForSubmit()
   {
-    return this.user && this.user.email && this.cartProducts && this.cartProducts.length > 0 && 
+    return this.user && this.user.email && this.user.country && this.cartProducts && this.cartProducts.length > 0 && 
     this.cartProducts.every(product => product.id > 0 && product.quantity > 0 && this.orderTotal > 0);
   }
 
