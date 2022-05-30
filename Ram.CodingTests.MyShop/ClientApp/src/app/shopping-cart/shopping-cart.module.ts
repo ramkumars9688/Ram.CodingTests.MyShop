@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ShoppingCartComponent } from './shopping-cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ShoppingCartItemComponent } from '../shopping-cart-item/shopping-cart-item.component';
 import { UserComponent } from '../user/user.component';
 
 const routes: Routes = [
@@ -11,7 +10,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ShoppingCartComponent, ShoppingCartItemComponent, UserComponent],
+  declarations: [ShoppingCartComponent, UserComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -3,9 +3,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponent } from 'ng-mocks';
 import { CheckoutService } from '../services/checkout-service/checkout.service';
 import { MockCheckoutService } from '../services/checkout-service/mock-checkout.service';
+import { CountryService } from '../services/country-service/country.service';
+import { MockCountryService } from '../services/country-service/mock-country.service';
+import { CurrencyService } from '../services/currency-service/currency.service';
+import { MockCurrencyService } from '../services/currency-service/mock-currency.service';
 import { MockShoppingCartService } from '../services/shopping-cart-service/mock-shopping-cart.service';
 import { ShoppingCartService } from '../services/shopping-cart-service/shopping-cart.service';
-import { ShoppingCartItemComponent } from '../shopping-cart-item/shopping-cart-item.component';
 import { UserComponent } from '../user/user.component';
 import { ShoppingCartComponent } from './shopping-cart.component';
 
@@ -15,10 +18,12 @@ describe('ShoppingCartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShoppingCartComponent, MockComponent(ShoppingCartItemComponent), MockComponent(UserComponent) ],
+      declarations: [ ShoppingCartComponent, MockComponent(UserComponent) ],
       providers: [
         { provide:ShoppingCartService, useClass: MockShoppingCartService },
-        { provide:CheckoutService, useClass: MockCheckoutService }
+        { provide:CheckoutService, useClass: MockCheckoutService },
+        { provide:CountryService, useClass: MockCountryService },
+        { provide:CurrencyService, useClass: MockCurrencyService }
       ],
       imports:[RouterTestingModule]
     })
