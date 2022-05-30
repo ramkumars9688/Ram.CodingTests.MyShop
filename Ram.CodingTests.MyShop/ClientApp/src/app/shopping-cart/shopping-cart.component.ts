@@ -30,6 +30,7 @@ export class ShoppingCartComponent implements OnInit {
       this._checkoutService.
       placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal, currency: 'AUD', user: { email: this.user.email } })
       .subscribe(order => {
+        this._shoppingCartService.clear();
         this._router.navigateByUrl('order-confirmation/'+order.orderId);
       });
     }
