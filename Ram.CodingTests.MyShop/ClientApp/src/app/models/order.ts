@@ -1,6 +1,6 @@
 
-import { ShoppingCartProduct } from "./shopping-cart-product";
-import { User } from "./user";
+import { ShoppingCartProduct } from './shopping-cart-product';
+import { User } from './user';
 
 export class Order {
     shoppingCartItems: ShoppingCartProduct[];

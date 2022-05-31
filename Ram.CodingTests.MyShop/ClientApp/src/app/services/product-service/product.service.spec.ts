@@ -9,7 +9,7 @@ describe('ProductService', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide:HttpClientService, useClass: MockHttpClientService }
+        { provide: HttpClientService, useClass: MockHttpClientService }
       ]
     });
     const testbed = getTestBed();
@@ -23,8 +23,8 @@ describe('ProductService', () => {
 
   it('should get products', () => {
     service.getProducts().subscribe(data => {
-      expect(data).toEqual([{id:1, name: 'Apple', description: 'test description', price: 6, type : ProductTypeEnum.Fruit},
-      {id:1, name: 'Carrot', description: 'test description', price: 5, type : ProductTypeEnum.Vegetable}])
+      expect(data).toEqual([{id: 1, name: 'Apple', description: 'test description', price: 6, type : ProductTypeEnum.Fruit},
+      {id: 1, name: 'Carrot', description: 'test description', price: 5, type : ProductTypeEnum.Vegetable}]);
     });
   });
 

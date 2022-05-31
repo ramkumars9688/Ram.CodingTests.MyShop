@@ -1,5 +1,5 @@
-import { Product } from "./product";
-import { ProductTypeEnum } from "./product-type-enum";
+import { Product } from './product';
+import { ProductTypeEnum } from './product-type-enum';
 
 export class ShoppingCartProduct implements Product {
     id: number;

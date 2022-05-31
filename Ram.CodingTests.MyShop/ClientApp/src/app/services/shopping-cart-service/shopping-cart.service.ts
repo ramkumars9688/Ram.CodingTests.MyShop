@@ -23,15 +23,14 @@ export class ShoppingCartService {
       cartProducts = [];
     }
 
-    let matchedProduct = cartProducts.find(cartProduct => cartProduct.id == product.id);
+    const matchedProduct = cartProducts.find(cartProduct => cartProduct.id === product.id);
 
     if (matchedProduct) {
       matchedProduct.quantity += 1;
-    }
-    else {
-      let cartProduct: ShoppingCartProduct = <ShoppingCartProduct>product;
+    } else {
+      const cartProduct: ShoppingCartProduct = <ShoppingCartProduct>product;
       cartProduct.quantity = 1;
-      cartProducts.push(cartProduct)
+      cartProducts.push(cartProduct);
     }
 
     this._sessionStorageService.setItem(environment.cartStorageKey, cartProducts);
@@ -41,7 +40,7 @@ export class ShoppingCartService {
   refreshCart() {
 
     let products = [];
-    let storedProducts = this._sessionStorageService.getItem(environment.cartStorageKey);
+    const storedProducts = this._sessionStorageService.getItem(environment.cartStorageKey);
     if (storedProducts) {
       products = storedProducts;
     }
@@ -49,15 +48,13 @@ export class ShoppingCartService {
   }
 
   removeCartItem(cartProductId: number): boolean {
-    let cartProducts: ShoppingCartProduct[] = this._sessionStorageService.getItem(environment.cartStorageKey);
+    const cartProducts: ShoppingCartProduct[] = this._sessionStorageService.getItem(environment.cartStorageKey);
 
     if (!cartProducts) {
       return false;
     }
 
-    let matchedIndex = cartProducts.findIndex(x => x.id == cartProductId);
-    console.log(cartProducts);
-    console.log(matchedIndex);
+    const matchedIndex = cartProducts.findIndex(x => x.id === cartProductId);
 
     if (matchedIndex >= 0) {
       cartProducts.splice(matchedIndex, 1);
@@ -67,6 +64,7 @@ export class ShoppingCartService {
 
       return true;
     }
+
     return false;
   }
 

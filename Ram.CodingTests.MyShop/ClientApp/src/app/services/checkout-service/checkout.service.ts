@@ -13,7 +13,7 @@ export class CheckoutService {
 
   placeOrder(order: Order) {
 
-    let objOrderServer = {
+    const objOrderServer = {
       user: order.user,
       totalAmount: order.totalAmount,
       currency: order.currency,
@@ -28,7 +28,7 @@ export class CheckoutService {
           productId: cartItem.id,
           quantity: cartItem.quantity
         }
-      )
+      );
     });
 
     return this._httpClientService.post('api/order', objOrderServer)

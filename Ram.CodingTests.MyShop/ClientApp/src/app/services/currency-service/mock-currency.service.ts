@@ -9,8 +9,7 @@ export class MockCurrencyService {
 
   constructor() {}
 
-  getConversionFactor(toCurrency: string)
-  {
+  getConversionFactor(toCurrency: string) {
     return 0.5;
   }
 }

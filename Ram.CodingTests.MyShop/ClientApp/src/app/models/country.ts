@@ -1,5 +1,5 @@
 
-import { Currency } from "./Currency";
+import { Currency } from './Currency';
 
 export class Country {
     code: string;

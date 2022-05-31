@@ -8,15 +8,14 @@ import { ProductTypeEnum } from '../../models/product-type-enum';
 })
 export class MockHttpClientService {
 
-  products : Product[]= [{id:1, name: 'Apple', description: 'test description', price: 6, type : ProductTypeEnum.Fruit},
-  {id:1, name: 'Carrot', description: 'test description', price: 5, type : ProductTypeEnum.Vegetable}];
-  
+  products: Product[] = [{id: 1, name: 'Apple', description: 'test description', price: 6, type : ProductTypeEnum.Fruit},
+  {id: 1, name: 'Carrot', description: 'test description', price: 5, type : ProductTypeEnum.Vegetable}];
+
   get<T>(path: string) {
     return of(this.products);
   }
 
-  post<T>(path: string, data: any)
-  {
+  post<T>(path: string, data: any) {
     return of({id: 123456});
   }
 

@@ -9,9 +9,8 @@ export class CurrencyService {
 
   constructor(private _httpService: HttpClientService) {}
 
-  getConversionFactor(toCurrency: string)
-  {
+  getConversionFactor(toCurrency: string) {
     return this._httpService
-      .get<number>('api/currency/conversion?toCurrency='+toCurrency);
+      .get<number>('api/currency/conversion?toCurrency=' + toCurrency);
   }
 }

@@ -10,7 +10,7 @@ describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
 
-  let mockProduct: Product = { id: 1, name: 'Apple', description: 'test description', price: 6, type: ProductTypeEnum.Fruit }
+  const mockProduct: Product = { id: 1, name: 'Apple', description: 'test description', price: 6, type: ProductTypeEnum.Fruit };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,17 +37,17 @@ describe('ProductComponent', () => {
     expect(component.product).toEqual(mockProduct);
     expect(fixture.debugElement.nativeElement.querySelector('.card-title').textContent).toBe(mockProduct.name);
     expect(fixture.debugElement.nativeElement.querySelector('.card-text').textContent).toBe(mockProduct.description);
-    expect(fixture.debugElement.nativeElement.querySelector('.price').textContent).toBe('$'+mockProduct.price);
+    expect(fixture.debugElement.nativeElement.querySelector('.price').textContent).toBe('$' + mockProduct.price);
   });
 
   it('addToCart should call shoppingCartService to add the product to cart', () => {
     const shoppingCartService: ShoppingCartService = TestBed.get(ShoppingCartService);
 
-    spyOn(shoppingCartService,'addToCart').and.callThrough();
+    spyOn(shoppingCartService, 'addToCart').and.callThrough();
     spyOn(component, 'addToCart').and.callThrough();
-    
+
     fixture.debugElement.nativeElement.querySelector('#btnAddToCart').click();
-    
+
     expect(component.addToCart).toHaveBeenCalled();
     expect(shoppingCartService.addToCart).toHaveBeenCalled();
   });

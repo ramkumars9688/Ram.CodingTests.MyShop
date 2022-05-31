@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   userForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     country: new FormControl('', [
       Validators.required])
   });
@@ -28,12 +28,11 @@ export class UserComponent implements OnInit {
   ngOnInit() {
   }
 
-  userFormChange()
-  {
-    let country = (this.userForm.get('country').valid && this.userForm.get('country').value) ? 
+  userFormChange() {
+    const country = (this.userForm.get('country').valid && this.userForm.get('country').value) ?
     this.userForm.get('country').value : undefined;
 
-    let email = (this.userForm.get('email').valid && this.userForm.get('email').value) ? 
+    const email = (this.userForm.get('email').valid && this.userForm.get('email').value) ?
     this.userForm.get('email').value : undefined;
 
     this.userChange.emit({ email: email, country: country });

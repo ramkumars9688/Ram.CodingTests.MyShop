@@ -33,7 +33,7 @@ describe('AppComponent', () => {
 
   it('should refreshCart on load', () => {
     const shoppingCartService: ShoppingCartService = TestBed.get(ShoppingCartService);
-    spyOn(shoppingCartService,'refreshCart').and.callThrough();
+    spyOn(shoppingCartService, 'refreshCart').and.callThrough();
 
     component.ngOnInit();
 

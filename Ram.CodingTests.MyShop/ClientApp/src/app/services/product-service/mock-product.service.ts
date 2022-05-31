@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { of } from "rxjs";
-import { Observable } from "rxjs/internal/Observable";
-import { Product } from "../../models/product";
-import { ProductTypeEnum } from "../../models/product-type-enum";
+import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { Product } from '../../models/product';
+import { ProductTypeEnum } from '../../models/product-type-enum';
 
 @Injectable({
   providedIn: 'root'
