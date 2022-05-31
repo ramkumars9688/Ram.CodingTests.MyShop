@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Ram.CodingTests.MyShop.ActionFilters;
 using Ram.CodingTests.MyShop.Models;
 using Ram.CodingTests.MyShop.Services;
 using System;
@@ -19,7 +20,7 @@ namespace Ram.CodingTests.MyShop.Controllers
         }
 
         [HttpPost]
-
+        [ServiceFilter(typeof(ValidateCreateOrderActionFilter))]
         public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] OrderRequest order)
         {
             try

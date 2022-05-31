@@ -48,5 +48,22 @@ namespace Ram.CodingTests.MyShop.UnitTests.Services
 
             result.Should().BeEquivalentTo(mockProducts);
         }
+
+        [Test]
+        public async Task GetProduct_PositiveAsync()
+        {
+            var mockProduct = new Product
+            {
+                Id = 1,
+                Name = "Apple",
+                Price = 5.25M,
+                Type = ProductTypeEnum.Fruit
+            };
+
+            _subProductRepository.GetProduct(1).Returns(mockProduct);
+            var result = await _productService.GetProduct(1);
+
+            result.Should().BeEquivalentTo(mockProduct);
+        }
     }
 }
