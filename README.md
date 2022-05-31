@@ -3,14 +3,14 @@
 Shopping Portal
 
 Usecases implemented:
-List available products to guest users
-Basic UI to allow a guest user to add products to cart
-Basic Cart view to 
+- List available products to guest users
+- Basic UI to allow a guest user to add products to cart
+- Basic Cart view to 
   - remove cart items 
   - change currencies
   - calculate shipping cost
   - allow guest user to place order
-Order confirmation page
+- Order confirmation page
 
 Unit tetsing in Backend and Frontend to demonstrate my Unit tetsing skills but I have not written tests for all scenarios due to time factor.
 
