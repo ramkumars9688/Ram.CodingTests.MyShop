@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ram.CodingTests.MyShop.ActionFilters;
 using Ram.CodingTests.MyShop.Repository;
 using Ram.CodingTests.MyShop.Services;
 
@@ -42,6 +43,8 @@ namespace Ram.CodingTests.MyShop
             services.AddScoped<ICurrencyService, CurrencyService>();
 
             services.AddSingleton<IShippingService, ShippingService>();
+
+            services.AddScoped<ValidateCreateOrderActionFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

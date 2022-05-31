@@ -16,6 +16,7 @@ namespace Ram.CodingTests.MyShop.Repository
     /// </summary>
     public class ProductRepository : IProductRepository
     {
+
         /// <summary>
         /// Get all products
         /// Price is in AUD
@@ -23,6 +24,22 @@ namespace Ram.CodingTests.MyShop.Repository
         /// </summary>
         /// <returns></returns>
         public Task<IReadOnlyList<Product>> GetAllProducts()
+        {
+            return Task.FromResult((IReadOnlyList<Product>)GetProducts());
+        }
+
+        /// <summary>
+        /// Get product
+        /// Price is in AUD
+        /// Unit is not supported yet, default to Kilogram
+        /// </summary>
+        /// <returns></returns>
+        public Task<Product> GetProduct(long id)
+        {
+            return Task.FromResult(GetProducts().Find(c => c.Id ==  id));
+        }
+
+        private List<Product> GetProducts()
         {
             var products = new List<Product>
             {
@@ -107,26 +124,7 @@ namespace Ram.CodingTests.MyShop.Repository
                     Type = ProductTypeEnum.Vegetable
                 }
             };
-
-            return Task.FromResult((IReadOnlyList<Product>)products);
-        }
-
-        /// <summary>
-        /// Get product
-        /// Price is in AUD
-        /// Unit is not supported yet, default to Kilogram
-        /// </summary>
-        /// <returns></returns>
-        public Task<Product> GetProduct(long id)
-        {
-            return Task.FromResult(new Product
-            {
-                Id = id,
-                Name = "Royal Gala Apple",
-                Description = "Sweet and juicy apple.",
-                Price = 5.25M,
-                Type = ProductTypeEnum.Fruit
-            });
+            return products;
         }
     }
 }

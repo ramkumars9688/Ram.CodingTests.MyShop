@@ -8,6 +8,8 @@ namespace Ram.CodingTests.MyShop.Services
     public interface IProductService
     {
         Task<IReadOnlyList<Product>> GetAllProducts();
+
+        Task<Product> GetProduct(long id);
     }
 
     public class ProductService : IProductService
@@ -22,6 +24,10 @@ namespace Ram.CodingTests.MyShop.Services
         public Task<IReadOnlyList<Product>> GetAllProducts()
         {
             return _productRepository.GetAllProducts();
+        }
+        public Task<Product> GetProduct(long id)
+        {
+            return _productRepository.GetProduct(id);
         }
     }
 }
