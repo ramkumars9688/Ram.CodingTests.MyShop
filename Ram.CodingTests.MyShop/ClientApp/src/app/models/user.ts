@@ -1,4 +1,4 @@
-import { Country } from "./country";
+import { Country } from './country';
 
 export class User {
     email: string;

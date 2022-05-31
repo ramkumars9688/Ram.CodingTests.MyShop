@@ -22,9 +22,9 @@ export class ShoppingCartComponent implements OnInit {
   countries: Country[];
   selectedCountry: Country;
   currencyFactor = 1;
-  shippingCost: number = 0;
+  shippingCost = 0;
 
-  defaultCountryCode: string = 'AU'; //Todo: hardcoded for now, Has to configured in backend(DB or config settings)
+  defaultCountryCode = 'AU'; // Todo: hardcoded for now, Has to configured in backend(DB or config settings)
 
   constructor(private _shoppingCartService: ShoppingCartService,
     private _checkoutService: CheckoutService,
@@ -35,7 +35,7 @@ export class ShoppingCartComponent implements OnInit {
 
     this._countryService.getCountries().subscribe((countries) => {
       this.countries = countries;
-      this.selectedCountry = this.countries.find(x => x.code == this.defaultCountryCode);
+      this.selectedCountry = this.countries.find(x => x.code === this.defaultCountryCode);
     });
   }
 
@@ -47,7 +47,13 @@ export class ShoppingCartComponent implements OnInit {
   placeOrder() {
     if (this.cartProducts) {
       this._checkoutService.
-        placeOrder({ shoppingCartItems: this.cartProducts, totalAmount: this.orderTotal + this.shippingCost, currency: this.selectedCountry.currency.code, user: { email: this.user.email } })
+        placeOrder(
+          {
+            shoppingCartItems: this.cartProducts,
+            totalAmount: this.orderTotal + this.shippingCost,
+            currency: this.selectedCountry.currency.code,
+            user: { email: this.user.email }
+          })
         .subscribe(order => {
           this._shoppingCartService.clear();
           this._router.navigateByUrl('order-confirmation/' + order.orderId);
@@ -56,9 +62,8 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   onUserDataChange() {
-    console.log(this.user);
 
-    if (!this.user.country || this.selectedCountry.code == this.user.country.code) {
+    if (!this.user.country || this.selectedCountry.code === this.user.country.code) {
       return;
     }
     this.selectedCountry = this.user.country;
@@ -77,7 +82,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   removeProduct(cartProduct: ShoppingCartProduct) {
-    console.log(cartProduct);
     if (this._shoppingCartService.removeCartItem(cartProduct.id)) {
       this.cartProducts = this._shoppingCartService.getCartData();
       this.calculateShippingCost();
@@ -91,7 +95,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   calculateShippingCost() {
-    if (this.orderTotal == 0) {
+    if (this.orderTotal === 0) {
       this.shippingCost = 0;
       return;
     }

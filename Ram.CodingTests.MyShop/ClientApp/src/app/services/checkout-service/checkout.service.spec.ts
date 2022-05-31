@@ -21,7 +21,12 @@ describe('CheckoutService', () => {
     const httpClientService: HttpClientService = TestBed.get(HttpClientService);
     spyOn(httpClientService, 'post').and.callThrough();
 
-    const order = { currency: 'AUD', totalAmount: 20.35, user: { email: 'test1@gmail.com' }, shoppingCartItems: [{ id: 123, price: 5.5, type: ProductTypeEnum.Fruit, name: 'Apple', quantity: 2, description: 'Fruit' }] };
+    const order = {
+      currency: 'AUD',
+      totalAmount: 20.35,
+      user: { email: 'test1@gmail.com' },
+      shoppingCartItems: [{ id: 123, price: 5.5, type: ProductTypeEnum.Fruit, name: 'Apple', quantity: 2, description: 'Fruit' }]
+    };
     const serverOrderObj = {
       user: order.user,
       totalAmount: order.totalAmount,
@@ -35,8 +40,8 @@ describe('CheckoutService', () => {
     };
     service.placeOrder(order);
 
-    httpClientService.post('api/order',serverOrderObj).subscribe(order => {
-      expect(order).toEqual({id: 123456})
+    httpClientService.post('api/order', serverOrderObj).subscribe(orderRes => {
+      expect(orderRes).toEqual({ id: 123456 });
     });
 
     expect(httpClientService.post).toHaveBeenCalledWith('api/order', serverOrderObj);

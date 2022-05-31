@@ -10,7 +10,7 @@ export class MockCountryService {
   constructor() { }
 
   getCountries() {
-    let countries: Country[] = [{ code: 'AU', name: 'Australia', currency: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' }},
+    const countries: Country[] = [{ code: 'AU', name: 'Australia', currency: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' }},
     { code: 'NZ', name: 'New Zealand', currency: { code: 'NZD', name: 'New Zealand Dollar', symbol: 'NZ$' } }];
     return of(countries);
   }

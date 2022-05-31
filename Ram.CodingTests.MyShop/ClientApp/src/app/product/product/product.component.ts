@@ -14,11 +14,10 @@ export class ProductComponent implements OnInit {
   constructor(private _shoppingCartService: ShoppingCartService) {
    }
 
-  ngOnInit() { 
+  ngOnInit() {
   }
 
-  addToCart()
-  {
+  addToCart() {
     this._shoppingCartService.addToCart(this.product);
   }
 

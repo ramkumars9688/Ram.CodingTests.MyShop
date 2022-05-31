@@ -29,15 +29,14 @@ describe('HttpClientService', () => {
   }
 
   it('should be created', () => {
-    const service: HttpClientService = TestBed.get(HttpClientService);
     expect(service).toBeTruthy();
   });
 
   it('should get data from http endpoint', () => {
-    const mockData = [{ Name: "Test1" }, { Name: "Test2" }];
+    const mockData = [{ Name: 'Test1' }, { Name: 'Test2' }];
 
     service.get('api/testaction').subscribe(data => {
-      expect(data).toBe(mockData)
+      expect(data).toBe(mockData);
     });
 
     mockHttpCall('api/testaction', 'GET', mockData);
@@ -45,11 +44,11 @@ describe('HttpClientService', () => {
   });
 
   it('should post data to http endpoint', () => {
-    const mockData = [{ Name: "Test1" }, { Name: "Test2" }];
-    const mockResponse = { Name: "Test1" };
+    const mockData = [{ Name: 'Test1' }, { Name: 'Test2' }];
+    const mockResponse = { Name: 'Test1' };
 
     service.post('api/testaction', mockData).subscribe(data => {
-      expect(data).toEqual(mockResponse)
+      expect(data).toEqual(mockResponse);
     });
 
     mockHttpCall('api/testaction', 'POST', mockResponse);

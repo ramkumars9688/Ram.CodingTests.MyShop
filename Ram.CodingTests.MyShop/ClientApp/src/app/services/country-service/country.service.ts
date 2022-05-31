@@ -9,8 +9,7 @@ export class CountryService {
 
   constructor(private _httpService: HttpClientService) {}
 
-  getCountries()
-  {
+  getCountries() {
     return this._httpService
       .get<Country[]>('api/country');
   }

@@ -23,13 +23,13 @@ describe('ShoppingCartComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ShoppingCartComponent, MockComponent(UserComponent) ],
       providers: [
-        { provide:ShoppingCartService, useClass: MockShoppingCartService },
-        { provide:CheckoutService, useClass: MockCheckoutService },
-        { provide:CountryService, useClass: MockCountryService },
-        { provide:CurrencyService, useClass: MockCurrencyService },
-        { provide:ShippingService, useClass: MockShippingService }
+        { provide: ShoppingCartService, useClass: MockShoppingCartService },
+        { provide: CheckoutService, useClass: MockCheckoutService },
+        { provide: CountryService, useClass: MockCountryService },
+        { provide: CurrencyService, useClass: MockCurrencyService },
+        { provide: ShippingService, useClass: MockShippingService }
       ],
-      imports:[RouterTestingModule, MatIconModule]
+      imports: [RouterTestingModule, MatIconModule]
     })
     .compileComponents();
   }));

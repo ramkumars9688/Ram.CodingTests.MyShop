@@ -1,17 +1,17 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { MatIconModule } from "@angular/material";
-import { Product } from "../models/product";
-import { ProductTypeEnum } from "../models/product-type-enum";
-import { NavMenuComponent } from "./nav-menu.component";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material';
+import { Product } from '../models/product';
+import { ProductTypeEnum } from '../models/product-type-enum';
+import { NavMenuComponent } from './nav-menu.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ShoppingCartService } from "../services/shopping-cart-service/shopping-cart.service";
-import { MockShoppingCartService } from "../services/shopping-cart-service/mock-shopping-cart.service";
+import { ShoppingCartService } from '../services/shopping-cart-service/shopping-cart.service';
+import { MockShoppingCartService } from '../services/shopping-cart-service/mock-shopping-cart.service';
 
 describe('NavMenuComponent', () => {
   let component: NavMenuComponent;
   let fixture: ComponentFixture<NavMenuComponent>;
 
-  let mockProduct: Product = { id: 1, name: 'Apple', description: 'test description', price: 6, type: ProductTypeEnum.Fruit }
+  const mockProduct: Product = { id: 1, name: 'Apple', description: 'test description', price: 6, type: ProductTypeEnum.Fruit };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,7 +41,7 @@ describe('NavMenuComponent', () => {
       { id: 2, name: 'Apple', description: 'Fruit', price: 6, type: ProductTypeEnum.Fruit, quantity: 5 },
       { id: 2, name: 'Carrot', description: 'Fruit', price: 5, type: ProductTypeEnum.Fruit, quantity: 1 }]);
       expect(component.shoppingCartProductsCount).toBe(8);
-    })
+    });
   });
 
   it('ngOnDestroy should unsubscribe subscription', () => {

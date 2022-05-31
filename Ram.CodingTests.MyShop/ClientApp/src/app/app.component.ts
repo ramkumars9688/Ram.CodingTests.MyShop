@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
 
   constructor(private _shoppingCartService: ShoppingCartService) {
   }
-  
+
   ngOnInit(): void {
     this._shoppingCartService.refreshCart();
   }

@@ -14,7 +14,7 @@ describe('UserComponent', () => {
       declarations: [ UserComponent ],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide:CountryService, useClass: MockCountryService }
+        { provide: CountryService, useClass: MockCountryService }
       ],
     })
     .compileComponents();
