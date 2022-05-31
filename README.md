@@ -16,12 +16,12 @@ Unit tetsing in Backend and Frontend to demonstrate my Unit tetsing skills but I
 
 
 Features I thought to add but couldn't due to time factor
-100% unit test coverage
-Allow user to signup & login & Authorize the endpoint
-Store Order details in Database
-Display spinner on Http calls
-Handle http errors and display friendly message on screen
-UX improvements
+- 100% unit test coverage
+- Allow user to signup & login & Authorize the endpoint
+- Store Order details in Database
+- Display spinner on Http calls
+- Handle http errors and display friendly message on screen
+- UX improvements
 
 Steps to Run application:
 use git clone to clone the project to the local folder
