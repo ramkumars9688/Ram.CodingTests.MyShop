@@ -13,6 +13,8 @@ Usecases implemented:
 - Order confirmation page
 
 Unit tetsing in Backend and Frontend to demonstrate my Unit tetsing skills but I have not written tests for all scenarios due to time factor.
+Some of Backedn classes with unitests: OrderControllerTests, ProductControllerTests, OrderServiceTests, ProductServiceTests
+Some of  UI components with unittests: nav-menu.component.spec.ts, product.component.spec.ts,app.component.spec, session-storage.service.spec.ts, http-client.service.spec.ts, shopping-cart.service.spec.ts, product.service.spec.ts, checkout.service.spec.ts
 
 
 Features I thought to add but couldn't due to time factor
